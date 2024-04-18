@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Aplikasi Waktu Sholat</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+    <h1>Aplikasi Waktu Sholat</h1>
+    <h2>Aplikasi Waktu Sholat Lima Waktu</h2>
+
+    <p id="waktu"></p>
+
+    <p id="layout"></p>
+
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+<script>
+    window.addEventListener("load", () => {
+        let type = ["Subuh","Zuhur","Ashar","Magrib","Isya"];
+        for (let i = 0; i < 5; i++) {
+            document.getElementById("layout").innerHTML = `
+                <div class="modal fade" id="waktuModal${i}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Alarm Sholat ${type[i]}</h5>
+                            </div>
+                            <div class="modal-body">
+                                Waktu Nya Solat ${type[i]}
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+        }
+    })
+
+    const myInterval = setInterval(myTimer, 1000);
+    function myTimer() {
+        const date = new Date();
+        document.getElementById("waktu").innerHTML = date.toLocaleTimeString();
+
+        const list = [
+            ["4:32:12 AM", "4:34:12 AM", "Subuh"], ["12:05:12 PM", "12:07:12 PM","Zuhur"], ["3:32:12 PM", "3:34:12 PM","Ashar"], ["6:10:01 PM", "6:12:12 PM","Magrib"], ["7:42:02 PM", "7:42:12 PM","Isya"]
+        ];
+
+        for (let i = 0; i < list.length; i++) {
+            if (date.toLocaleTimeString() > list[i][0] && date.toLocaleTimeString() < list[i][1]) {
+                document.getElementById("waktu").innerHTML = date.toLocaleTimeString() + " => alarm =>" + i;
+                $('#waktuModal' + i).modal('show');
+            } else {
+                setInterval(myInterval);
+                $('#waktuModal' + i).modal('hide');
+            }
+        }
+    }
+    function myStop() {
+        clearInterval(myInterval);
+    }
+</script>
+
+</html>
