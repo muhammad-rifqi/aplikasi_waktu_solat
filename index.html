@@ -27,8 +27,9 @@
 <script>
     window.addEventListener("load", () => {
         let type = ["Subuh","Zuhur","Ashar","Magrib","Isya"];
+        let html = ``;
         for (let i = 0; i < 5; i++) {
-            document.getElementById("layout").innerHTML = `
+            html += `
                 <div class="modal fade" id="waktuModal${i}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -46,6 +47,7 @@
                 </div>
                 `;
         }
+        document.getElementById("layout").innerHTML = html;
     })
 
     const myInterval = setInterval(myTimer, 1000);
@@ -54,7 +56,7 @@
         document.getElementById("waktu").innerHTML = date.toLocaleTimeString();
 
         const list = [
-            ["4:32:12 AM", "4:34:12 AM", "Subuh"], ["12:05:12 PM", "12:07:12 PM","Zuhur"], ["3:32:12 PM", "3:34:12 PM","Ashar"], ["6:10:01 PM", "6:12:12 PM","Magrib"], ["7:42:02 PM", "7:42:12 PM","Isya"]
+            ["4:32:12 AM", "4:34:12 AM"], ["12:26:01 PM", "12:26:22 PM"], ["1:43:02 PM", "1:43:12 PM"], ["6:10:01 PM", "6:12:12 PM"], ["7:42:02 PM", "7:42:12 PM"]
         ];
 
         for (let i = 0; i < list.length; i++) {
